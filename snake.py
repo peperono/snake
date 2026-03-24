@@ -11,18 +11,18 @@ BORDE = 2 * CELDA   # grosor del muro de ladrillos
 FPS = 4
 
 # Colores
-FONDO  = (0, 0, 0)
-OSCURO = (24,  56,  24)
+FONDO  = (12, 8, 4)      # fondo sepia oscuro
+OSCURO = (55, 38, 16)    # serpiente por defecto: ambar oscuro
 D3 = 3  # profundidad del efecto 3D (bisel)
 
 COLORES_GATO = [
-    (220,  60,  60),   # rojo
-    (60,  120, 220),   # azul
-    (220, 160,  30),   # naranja
-    (160,  60, 220),   # morado
-    (30,  200, 180),   # turquesa
-    (220,  80, 160),   # rosa
-    (255, 220,  40),   # amarillo
+    (185,  90,  55),   # terracota
+    ( 80, 105, 150),   # azul pizarra
+    (200, 145,  40),   # ambar
+    (130,  80, 110),   # malva
+    ( 65, 130, 105),   # verde salvia
+    (175,  95, 100),   # rosa antiguo
+    (215, 185,  70),   # oro viejo
 ]
 
 def dibujar_caja_3d(surf, x, y, color):
@@ -91,10 +91,10 @@ def dibujar_gato(superficie, x, y, color):
     pygame.draw.line(superficie, claro, (x+1,  y+11), (x+6,  y+10), 1)
     pygame.draw.line(superficie, claro, (x+10, y+10), (x+15, y+11), 1)
 
-COLOR_PERRO  = (180, 120,  60)
-COLOR_PAJARO = (100, 160, 220)
-COLOR_CEREZA = (200,  30,  60)
-COLOR_PEZ    = ( 80, 180, 230)
+COLOR_PERRO  = (175, 115,  55)
+COLOR_PAJARO = ( 85, 105, 145)
+COLOR_CEREZA = (155,  55,  45)
+COLOR_PEZ    = ( 55, 125, 115)
 
 def dibujar_perro(superficie, x, y):
     """Dibuja un perrito pixelado en (x, y)."""
@@ -167,10 +167,10 @@ def dibujar_pez(superficie, x, y):
 
 def dibujar_ladrillos(superficie, oy=36):
     """Dibuja ladrillos 3D en los cuatro bordes del campo."""
-    LADRILLO = (165, 55, 30)
-    LAD_LUZ  = (215, 110,  70)   # arista iluminada (arriba/izquierda)
-    LAD_OSC  = ( 90,  25,  10)   # arista en sombra (abajo/derecha)
-    MORTERO  = (210, 190, 170)
+    LADRILLO = (140, 100,  55)
+    LAD_LUZ  = (185, 148,  90)   # arista iluminada (arriba/izquierda)
+    LAD_OSC  = ( 75,  50,  20)   # arista en sombra (abajo/derecha)
+    MORTERO  = (185, 168, 140)
     BW = CELDA * 2
     BH = CELDA
 
@@ -432,14 +432,14 @@ def main():
     pantalla = pygame.display.set_mode((ANCHO, ALTO + 52), pygame.NOFRAME)
     pygame.display.set_caption("Snake")
     reloj = pygame.time.Clock()
-    fuente_label  = pygame.font.SysFont("consolas", 11, bold=False)
-    fuente_valor  = pygame.font.SysFont("consolas", 26, bold=True)
-    fuente_grande = pygame.font.SysFont("consolas", 36, bold=True)
+    fuente_label  = pygame.font.SysFont("courier new", 11, bold=False)
+    fuente_valor  = pygame.font.SysFont("courier new", 26, bold=True)
+    fuente_grande = pygame.font.SysFont("courier new", 36, bold=True)
 
     # --- Pantalla de inicio ---
-    fuente_titulo = pygame.font.SysFont("consolas", 42, bold=True)
-    fuente_tecla  = pygame.font.SysFont("consolas", 15, bold=False)
-    fuente_sub    = pygame.font.SysFont("consolas", 18, bold=True)
+    fuente_titulo = pygame.font.SysFont("courier new", 42, bold=True)
+    fuente_tecla  = pygame.font.SysFont("courier new", 15, bold=False)
+    fuente_sub    = pygame.font.SysFont("courier new", 18, bold=True)
 
     teclas = [
         ("FLECHAS",       "Mover la serpiente"),
@@ -468,40 +468,40 @@ def main():
                 elif ev.key == pygame.K_ESCAPE:
                     pygame.quit(); sys.exit()
 
-        pantalla.fill((10, 25, 10))
+        pantalla.fill((16, 11, 5))
 
         # Título
-        t = fuente_titulo.render("S N A K E", True, (80, 220, 80))
+        t = fuente_titulo.render("S N A K E", True, (220, 175, 60))
         pantalla.blit(t, (ANCHO // 2 - t.get_width() // 2, 30))
-        pygame.draw.line(pantalla, (50, 130, 50), (40, 82), (ANCHO - 40, 82), 1)
+        pygame.draw.line(pantalla, (120, 90, 35), (40, 82), (ANCHO - 40, 82), 1)
 
         # Controles
-        lbl = fuente_sub.render("CONTROLES", True, (100, 200, 100))
+        lbl = fuente_sub.render("CONTROLES", True, (200, 160, 70))
         pantalla.blit(lbl, (ANCHO // 2 - lbl.get_width() // 2, 95))
         for i, (key, desc) in enumerate(teclas):
             y = 122 + i * 22
-            k_surf = fuente_tecla.render(f"[ {key:<10} ]", True, (180, 255, 180))
-            d_surf = fuente_tecla.render(desc, True, (160, 200, 160))
+            k_surf = fuente_tecla.render(f"[ {key:<10} ]", True, (200, 170, 100))
+            d_surf = fuente_tecla.render(desc, True, (155, 130, 80))
             pantalla.blit(k_surf, (ANCHO // 2 - 190, y))
             pantalla.blit(d_surf, (ANCHO // 2 + 10,  y))
 
-        pygame.draw.line(pantalla, (50, 130, 50), (40, 264), (ANCHO - 40, 264), 1)
+        pygame.draw.line(pantalla, (120, 90, 35), (40, 264), (ANCHO - 40, 264), 1)
 
         # Puntuaciones
-        lbl2 = fuente_sub.render("PUNTUACION POR ANIMAL", True, (100, 200, 100))
+        lbl2 = fuente_sub.render("PUNTUACION POR ANIMAL", True, (200, 160, 70))
         pantalla.blit(lbl2, (ANCHO // 2 - lbl2.get_width() // 2, 276))
         for i, (nombre, pts, color) in enumerate(puntos_items):
             y = 303 + i * 22
             pygame.draw.circle(pantalla, color, (ANCHO // 2 - 120, y + 7), 7)
             n_surf = fuente_tecla.render(nombre, True, color)
-            p_surf = fuente_tecla.render(pts, True, (200, 255, 200))
+            p_surf = fuente_tecla.render(pts, True, (190, 160, 90))
             pantalla.blit(n_surf, (ANCHO // 2 - 105, y))
             pantalla.blit(p_surf, (ANCHO // 2 + 60,  y))
 
-        pygame.draw.line(pantalla, (50, 130, 50), (40, 418), (ANCHO - 40, 418), 1)
+        pygame.draw.line(pantalla, (120, 90, 35), (40, 418), (ANCHO - 40, 418), 1)
 
         # Pulsa espacio
-        pulsa = fuente_sub.render("Pulsa ESPACIO para empezar", True, (80, 220, 80))
+        pulsa = fuente_sub.render("Pulsa ESPACIO para empezar", True, (220, 175, 60))
         pantalla.blit(pulsa, (ANCHO // 2 - pulsa.get_width() // 2, 435))
 
         pygame.display.flip()
@@ -625,30 +625,30 @@ def main():
 
             # --- Dibujar ---
             # Barra superior
-            pantalla.fill((15, 35, 15), (0, 0, ANCHO, 52))
-            pygame.draw.line(pantalla, (60, 100, 60), (0, 51), (ANCHO, 51), 1)
+            pantalla.fill((22, 15, 7), (0, 0, ANCHO, 52))
+            pygame.draw.line(pantalla, (95, 70, 28), (0, 51), (ANCHO, 51), 1)
 
             # Bloque PUNTUACION (izquierda)
-            dibujar_panel_3d(pantalla, 8, 4, 160, 44, (70, 120, 70))
-            lbl_p = fuente_label.render("PUNTUACION", True, (120, 180, 120))
-            val_p = fuente_valor.render(str(puntuacion), True, (255, 255, 255))
+            dibujar_panel_3d(pantalla, 8, 4, 160, 44, (88, 62, 24))
+            lbl_p = fuente_label.render("PUNTUACION", True, (190, 155, 75))
+            val_p = fuente_valor.render(str(puntuacion), True, (255, 210, 120))
             pantalla.blit(lbl_p, (88 - lbl_p.get_width() // 2, 8))
             pantalla.blit(val_p, (88 - val_p.get_width() // 2, 21))
 
             # Icono sonido (centro)
             icono_txt = "[S] SFX: ON " if sonido_activo else "[S] SFX: OFF"
-            icono_color = (150, 255, 150) if sonido_activo else (180, 80, 80)
+            icono_color = (220, 180, 80) if sonido_activo else (170, 75, 65)
             icono_surf = fuente_label.render(icono_txt, True, icono_color)
             pantalla.blit(icono_surf, (ANCHO // 2 - icono_surf.get_width() // 2, 20))
 
             # Separador central
-            pygame.draw.line(pantalla, (50, 90, 50), (ANCHO//2, 8), (ANCHO//2, 44), 1)
+            pygame.draw.line(pantalla, (80, 58, 22), (ANCHO//2, 8), (ANCHO//2, 44), 1)
 
             # Bloque VELOCIDAD (derecha)
             rx = ANCHO - 168
-            dibujar_panel_3d(pantalla, rx, 4, 160, 44, (70, 120, 70))
-            lbl_v = fuente_label.render("VELOCIDAD  [+/-]", True, (120, 180, 120))
-            val_v = fuente_valor.render(f"{fps}", True, (255, 255, 255))
+            dibujar_panel_3d(pantalla, rx, 4, 160, 44, (88, 62, 24))
+            lbl_v = fuente_label.render("VELOCIDAD  [+/-]", True, (190, 155, 75))
+            val_v = fuente_valor.render(f"{fps}", True, (255, 210, 120))
             pantalla.blit(lbl_v, (rx + 80 - lbl_v.get_width() // 2, 8))
             pantalla.blit(val_v, (rx + 80 - val_v.get_width() // 2, 21))
 
@@ -696,9 +696,9 @@ def main():
                 pantalla.blit(t_pausa, (cx - t_pausa.get_width() // 2, cy - 18))
 
             if game_over:
-                t1 = fuente_grande.render("GAME OVER", True, (220, 60, 60))
-                t2 = fuente_valor.render(f"Puntuacion: {puntuacion}", True, (220, 220, 220))
-                t3 = fuente_label.render("R reiniciar   ESC salir", True, (180, 180, 180))
+                t1 = fuente_grande.render("GAME OVER", True, (190, 75, 50))
+                t2 = fuente_valor.render(f"Puntuacion: {puntuacion}", True, (225, 195, 125))
+                t3 = fuente_label.render("R reiniciar   ESC salir", True, (155, 130, 80))
                 cx, cy = ANCHO // 2, 52 + ALTO // 2
                 pantalla.blit(t1, (cx - t1.get_width() // 2, cy - 50))
                 pantalla.blit(t2, (cx - t2.get_width() // 2, cy + 10))
