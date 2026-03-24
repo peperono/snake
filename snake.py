@@ -504,6 +504,10 @@ def main():
         pulsa = fuente_sub.render("Pulsa ESPACIO para empezar", True, (80, 220, 80))
         pantalla.blit(pulsa, (ANCHO // 2 - pulsa.get_width() // 2, 435))
 
+        # Copyright
+        copy = fuente_label.render("(c) peperono", True, (60, 100, 60))
+        pantalla.blit(copy, (ANCHO // 2 - copy.get_width() // 2, 590))
+
         pygame.display.flip()
         reloj.tick(30)
 
