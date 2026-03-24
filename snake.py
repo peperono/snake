@@ -413,9 +413,9 @@ def crear_jiji(sample_rate=44100):
 def dibujar_borde_exterior(surf):
     """Dibuja un borde decorativo en el perimetro de la ventana."""
     W, H = surf.get_size()
-    pygame.draw.rect(surf, (0,   0,   0),    (0, 0, W, H),       1)  # negro exterior
-    pygame.draw.rect(surf, (255, 220,  50),  (1, 1, W-2, H-2),   3)  # amarillo brillante
-    pygame.draw.rect(surf, (180, 140,  20),  (4, 4, W-8, H-8),   1)  # amarillo oscuro interior
+    pygame.draw.rect(surf, (0,   0,   0),   (0, 0, W, H),       1)  # negro exterior
+    pygame.draw.rect(surf, (80, 220,  80),  (1, 1, W-2, H-2),   3)  # verde brillante
+    pygame.draw.rect(surf, (30,  80,  30),  (4, 4, W-8, H-8),   1)  # verde oscuro interior
 
 
 def posicion_aleatoria(serpiente):
