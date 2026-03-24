@@ -410,6 +410,14 @@ def crear_jiji(sample_rate=44100):
     audio = (wave * 20000).astype(np.int16)
     return pygame.sndarray.make_sound(np.column_stack([audio, audio]))
 
+def dibujar_borde_exterior(surf):
+    """Dibuja un borde decorativo en el perimetro de la ventana."""
+    W, H = surf.get_size()
+    pygame.draw.rect(surf, (0,   0,   0),   (0, 0, W, H),       1)  # negro exterior
+    pygame.draw.rect(surf, (80, 220,  80),  (1, 1, W-2, H-2),   3)  # verde brillante
+    pygame.draw.rect(surf, (30,  80,  30),  (4, 4, W-8, H-8),   1)  # verde oscuro interior
+
+
 def posicion_aleatoria(serpiente):
     while True:
         x = random.randrange(BORDE, ANCHO - BORDE, CELDA)
@@ -508,6 +516,7 @@ def main():
         copy = fuente_label.render("(c) peperono", True, (60, 100, 60))
         pantalla.blit(copy, (ANCHO // 2 - copy.get_width() // 2, 590))
 
+        dibujar_borde_exterior(pantalla)
         pygame.display.flip()
         reloj.tick(30)
 
@@ -708,6 +717,7 @@ def main():
                 pantalla.blit(t2, (cx - t2.get_width() // 2, cy + 10))
                 pantalla.blit(t3, (cx - t3.get_width() // 2, cy + 40))
 
+            dibujar_borde_exterior(pantalla)
             pygame.display.flip()
             reloj.tick(fps)
 
