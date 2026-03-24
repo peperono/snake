@@ -631,7 +631,7 @@ def main():
             # Bloque PUNTUACION (izquierda)
             dibujar_panel_3d(pantalla, 8, 4, 160, 44, (70, 120, 70))
             lbl_p = fuente_label.render("PUNTUACION", True, (120, 180, 120))
-            val_p = fuente_valor.render(str(puntuacion), True, (255, 255, 255))
+            val_p = fuente_valor.render(str(puntuacion), True, (255, 220, 50))
             pantalla.blit(lbl_p, (88 - lbl_p.get_width() // 2, 8))
             pantalla.blit(val_p, (88 - val_p.get_width() // 2, 21))
 
@@ -648,7 +648,7 @@ def main():
             rx = ANCHO - 168
             dibujar_panel_3d(pantalla, rx, 4, 160, 44, (70, 120, 70))
             lbl_v = fuente_label.render("VELOCIDAD  [+/-]", True, (120, 180, 120))
-            val_v = fuente_valor.render(f"{fps}", True, (255, 255, 255))
+            val_v = fuente_valor.render(f"{fps}", True, (255, 220, 50))
             pantalla.blit(lbl_v, (rx + 80 - lbl_v.get_width() // 2, 8))
             pantalla.blit(val_v, (rx + 80 - val_v.get_width() // 2, 21))
 
